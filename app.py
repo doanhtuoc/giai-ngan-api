@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from supabase import create_client
+from flask import Flask, request, jsonify, render_template # Thêm render_template
 import os
 
 app = Flask(__name__)
@@ -11,7 +12,8 @@ supabase = create_client(url, key)
 
 @app.route('/')
 def home():
-    return "Máy chủ giải ngân đang hoạt động!"
+    # Trả về giao diện web thay vì dòng chữ thông thường
+    return render_template('index.html')
 
 @app.route('/day-du-lieu', methods=['POST'])
 def post_data():
