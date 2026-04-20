@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Gửi Kết Quả Giải Ngân</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; }
+        button { background: #28a745; color: white; padding: 10px; width: 100%; border: none; cursor: pointer; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <h2>Báo cáo giải ngân vốn</h2>
+    <form id="giaiNganForm">
+        <input type="text" id="ma_du_an" placeholder="Mã dự án (VD: DA001)" required>
+        <input type="number" id="so_tien" placeholder="Số tiền giải ngân" required>
+        <textarea id="ghi_chu" placeholder="Ghi chú thêm"></textarea>
+        <button type="submit">Gửi kết quả</button>
+    </form>
 
+    <script>
+        document.getElementById('giaiNganForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const data = {
+                ma_du_an: document.getElementById('ma_du_an').value,
+                so_tien: document.getElementById('so_tien').value,
+                ghi_chu: document.getElementById('ghi_chu').value
+            };
+
+            const response = await fetch('/day-du-lieu', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('✅ Đã gửi dữ liệu thành công!');
+                e.target.reset();
+            } else {
+                alert('❌ Lỗi khi gửi dữ liệu.');
+            }
+        };
+    </script>
+</body>
+</html>
