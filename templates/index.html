@@ -24,7 +24,7 @@
             e.preventDefault();
             const data = {
                 ma_du_an: document.getElementById('ma_du_an').value,
-                so_tien: document.getElementById('so_tien').value,
+                so_tien: parseFloat(document.getElementById('so_tien').value), // Ép về kiểu số thực
                 ghi_chu: document.getElementById('ghi_chu').value
             };
 
